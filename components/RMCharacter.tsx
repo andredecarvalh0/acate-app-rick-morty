@@ -13,18 +13,17 @@ import {
 import { 
     useEffect, 
     useState,
-    useCallback, 
+    
 } from 'react';
 
 import Api from '../services/Api';
 
-import { ICharacter} from '../types';
+import { ICharacter } from '../types';
 
 function RMCharacter() {
 
     const [ character, setCharacter ] = useState<ICharacter[]>();
     const [ showModal, setShowModal] = useState(false);
-    const [ selected, setSelected ] = useState<Number>();
     const [ characterDetails, setCharacterDetails ] = useState<ICharacter>();
 
     useEffect(() =>{
@@ -36,7 +35,16 @@ function RMCharacter() {
     }, [])
 
     const getDataCharacter = (id: Number) => {
-       console.log('test', character?.filter( item => item.id === id) )
+        const value: ICharacter[] | any = character?.filter( item => item.id === id)
+
+        let parsed: any = {}
+
+        value.forEach(function (item: any) {
+            for (var i in item) {
+                parsed[i] = item[i];
+            }
+        });
+        setCharacterDetails(parsed)
     }
 
     return(
@@ -67,19 +75,15 @@ function RMCharacter() {
                                                 backgroundColor: '#7B25F0',
                                                }}
                                             >
- 
-                                               {/* {
-                                                character.find( item => item.id === selected )
-                                               }  */}
 
                                                 <Text>
-                                                    {item.name}
+                                                    {characterDetails?.name}
                                                 </Text>
                                                 
                                                 <Pressable
                                                     onPress={ () => setShowModal(!showModal) }
                                                 >
-                                                    <Text>Fechar Modal</Text>
+                                                    <Text>Fechar</Text>
                                                 </Pressable>
                                             </View>
 
@@ -105,7 +109,7 @@ function RMCharacter() {
                                             <Pressable
                                                 onPress={ () => {
                                                     getDataCharacter(item.id)
-                                                    // setShowModal(!showModal)
+                                                    setShowModal(!showModal)
                                                 } }
                                             >
                                                 <Text> Ver mais</Text>
