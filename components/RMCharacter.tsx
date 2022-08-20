@@ -1,7 +1,11 @@
 import {
     View,
     Text,
-    Pressable
+    Image,
+    Pressable,
+    StyleSheet,
+    SafeAreaView,
+    ScrollView,
 } from 'react-native';
 
 import { 
@@ -9,33 +13,42 @@ import {
     useState 
 } from 'react';
 
-import Api from '../services/Api'
+import Api from '../services/Api';
+
+import { ICharacter} from '../types';
 
 function RMCharacter() {
 
-    const [character, setCharacter] = useState();
+    const [character, setCharacter] = useState<ICharacter[]>();
 
     useEffect(() =>{
         Api.get('character').then(
-            res => console.log(res.data.results)
+            res => {
+                setCharacter(res.data.results)
+            }
         )
     }, [])
 
     return(
-        <View style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}>
-            <Text>Texto qualquer...</Text>
-            <Pressable
-                // onPress={() => setCount(!count)}
-            >
-                <Text>
-                    Click me
-                </Text>
-            </Pressable>
-        </View>
+        <SafeAreaView style={{ marginTop: 25 }}>
+            <ScrollView>
+            
+                { character?.map(
+                    (item, index) => (
+                        <View key={index}>
+                            <Image
+                                style={{ width: 100, height: 100 }}
+                                source={{ uri: item.image }}
+                            />
+                            <Text>{item.name}</Text>
+                        </View>
+                    )
+                )
+
+                }
+
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
