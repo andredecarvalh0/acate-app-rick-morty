@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
     Pressable
-} from 'react-native'
+} from 'react-native';
 
-function PokeCard() {
+import { 
+    useEffect, 
+    useState 
+} from 'react';
 
-    const [count, setCount] = useState(true)
+import Api from '../services/Api'
+
+function RMCharacter() {
+
+    const [character, setCharacter] = useState();
 
     useEffect(() =>{
-        console.log('Componente iniciado')
-    }, [count])
+        Api.get('character').then(
+            res => console.log(res.data.results)
+        )
+    }, [])
 
     return(
         <View style={{
@@ -21,7 +29,7 @@ function PokeCard() {
         }}>
             <Text>Texto qualquer...</Text>
             <Pressable
-                onPress={() => setCount(!count)}
+                // onPress={() => setCount(!count)}
             >
                 <Text>
                     Click me
@@ -31,4 +39,4 @@ function PokeCard() {
     )
 }
 
-export default PokeCard
+export default RMCharacter
