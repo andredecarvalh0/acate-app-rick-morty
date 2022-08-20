@@ -8,6 +8,7 @@ import {
     StyleSheet,
     SafeAreaView,
     ScrollView,
+    StatusBar,
 } from 'react-native';
 
 import { 
@@ -49,7 +50,7 @@ function RMCharacter() {
 
     return(
         <SafeAreaView
-            style={{ backgroundColor: '#7B25F0', }}
+            style={{ backgroundColor: '#7B25F0', marginTop: StatusBar.currentHeight }}
         >
             <ScrollView>
                 <View
@@ -61,7 +62,7 @@ function RMCharacter() {
                                         style={styles.card}
                                         key={index}
                                     >
-                                        <Modal
+                                        <Modal style={styles.modal}
                                             animationType='slide'
                                             visible={showModal}
                                             onRequestClose={
@@ -78,6 +79,9 @@ function RMCharacter() {
 
                                                 <Text>
                                                     {characterDetails?.name}
+                                                </Text>
+                                                <Text>
+                                                    {characterDetails?.species}
                                                 </Text>
                                                 
                                                 <Pressable
@@ -131,7 +135,6 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 15,
         backgroundColor: '#eee',
     },
     card: {
@@ -154,6 +157,9 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
+    },
+    modal: {
+        
     },
 
 })
