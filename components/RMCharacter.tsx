@@ -31,7 +31,9 @@ function RMCharacter() {
     }, [])
 
     return(
-        <SafeAreaView>
+        <SafeAreaView
+            style={{ backgroundColor: '#7B25F0', }}
+        >
             <ScrollView>
                 <View
                     style={styles.container}
@@ -46,17 +48,22 @@ function RMCharacter() {
                                             style={{ width: 100, height: 100 }}
                                             source={{ uri: item.image }}
                                         />
-                                        <Text
-                                            style={styles.textName}
-                                        >{item.name}</Text>
+                                        <View
+                                            style={styles.textBox}
+                                        >
+                                            <Text
+                                                style={styles.textName}
+                                            >{item.name}</Text>
 
-                                        <Text
-                                            style={styles.textName}
-                                        >{item.species}</Text>
+                                            <Text
+                                                style={styles.text}
+                                            >{item.species}</Text>
 
-                                        <Text
-                                        style={styles.textName}
-                                        >{item.gender}</Text>
+                                            <Text
+                                            style={styles.text}
+                                            >{item.gender}</Text>
+
+                                        </View>
 
                                     </View>
                                 )
@@ -69,15 +76,34 @@ function RMCharacter() {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
         width: Dimensions.get('window').width,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 25,
+        marginTop: 15,
+        backgroundColor: '#eee',
     },
-    card: {},
-    textName: {},
-    tect: {},
+    card: {
+        flexDirection: 'row',
+        backgroundColor: '#7B25F0',
+        width: Dimensions.get('window').width - 40,
+        paddingHorizontal: 15,
+        paddingVertical: 15,
+        borderRadius: 12,
+        margin: 12, 
+    },
+    textBox: {
+        flex: 1,
+        paddingHorizontal: 15,
+    },
+    textName: {
+        color: '#fff',
+        fontSize: 22,
+        fontWeigth: 'bold',
+    },
+    text: {
+        color: '#fff',
+    },
+
 })
 
 export default RMCharacter
