@@ -3,6 +3,7 @@ import {
     Text,
     Image,
     Pressable,
+    Dimensions,
     StyleSheet,
     SafeAreaView,
     ScrollView,
@@ -30,26 +31,53 @@ function RMCharacter() {
     }, [])
 
     return(
-        <SafeAreaView style={{ marginTop: 25 }}>
+        <SafeAreaView>
             <ScrollView>
-            
-                { character?.map(
-                    (item, index) => (
-                        <View key={index}>
-                            <Image
-                                style={{ width: 100, height: 100 }}
-                                source={{ uri: item.image }}
-                            />
-                            <Text>{item.name}</Text>
-                        </View>
-                    )
-                )
+                <View
+                    style={styles.container}
+                    >        
+                            { character?.map(
+                                (item, index) => (
+                                    <View 
+                                        style={styles.card}
+                                        key={index}
+                                    >
+                                        <Image
+                                            style={{ width: 100, height: 100 }}
+                                            source={{ uri: item.image }}
+                                        />
+                                        <Text
+                                            style={styles.textName}
+                                        >{item.name}</Text>
 
-                }
+                                        <Text
+                                            style={styles.textName}
+                                        >{item.species}</Text>
 
-            </ScrollView>
-        </SafeAreaView>
+                                        <Text
+                                        style={styles.textName}
+                                        >{item.gender}</Text>
+
+                                    </View>
+                                )
+                            )   }
+                </View>
+            </ScrollView>  
+        </ SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        // flex: 1,
+        width: Dimensions.get('window').width,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 25,
+    },
+    card: {},
+    textName: {},
+    tect: {},
+})
 
 export default RMCharacter
